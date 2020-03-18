@@ -9,8 +9,6 @@ Ride-Hailing Apps (Uber & Lyft) - The growing popularity of ride-hailing apps ha
 
 The following is the data used for the Airbnb analysis: https://unl.box.com/s/4bkuf0p6q9qgrjnsut63uqljogidw988
 
-The information is retrieved from:
-
-ZHVI and ZRI https://www.zillow.com/research/data/
-
+The information is retrieved from: \n
+ZHVI and ZRI https://www.zillow.com/research/data/ \n
 Airbnb Listings and Review http://insideairbnb.com/get-the-data.html
