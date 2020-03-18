@@ -1,4 +1,4 @@
-# Code Organization for Airbnb Analysis <h1> tag
+# Code Organization for Airbnb Analysis <h1> 
 
 Given that there are multiple differing kinds of data used to analyze the effects of Airbnb work, I would divide by 
 functionality (wrangling, analysis and visualization) and further dividing them into smaller files for different files
