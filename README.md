@@ -1,5 +1,5 @@
 # ECON409-Project
-Data Analysis and Visualization of the Gig Economy
+## Data Analysis and Visualization of the Gig Economy
 
 The emergence of community-based online platforms that facilitates peer-to-peer based economic activity such as Uber, Lyft and Airbnb has significantly changed and disrupted local economies and their respective industries. We are interested in the effects of the introduction of the “sharing economy”, specifically Airbnb and Uber. 
 
@@ -7,7 +7,7 @@ Airbnb - It is a common criticism that Airbnb causes home prices to rise as a re
 
 Ride-Hailing Apps (Uber & Lyft) - The growing popularity of ride-hailing apps has been a disruptive force in cities across the world. Its introduction and its effect on taxi services, the main competitor, has led to an array of regulations and bans of the service. We will gather historical data on traffic in US cities, explore the presence of alcohol in traffic fatalities, and compare the technology’s respective introduction with the employment and performance of taxi companies. 
 
-**Data Sources:**
+**Data Sources:**  
 The following is the data used for the Airbnb analysis: https://unl.box.com/s/4bkuf0p6q9qgrjnsut63uqljogidw988  
 The information is retrieved from:  
 ZHVI and ZRI https://www.zillow.com/research/data/  
