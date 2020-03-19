@@ -4,8 +4,6 @@ library(tidyverse)
 library(rlist)
 library(pipeR)
 
-zhvi <- read_csv("ZHVI Combined.csv")
-
 # city and types in ZHVI Combined.csv
 cities <- list("SanFrancisco", "Nashville", "Portland", "Washington", "Seattle",
             "SaintPaul", "NewOrleans", "Minneapolis", "Denver", "Columbus",    
