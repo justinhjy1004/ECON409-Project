@@ -32,10 +32,51 @@ subsetZHVI <- function(df, city, type){
 }
 
 # takes in a dataframe/tibble and a date [from] to a date [to], in the format of 
-# YYYY-MM-DD
+# YYYY-MM-DD in the form of string
 # Returns a dataframe according to the month and year provided
 timeframeZHVI <- function(df, from, to){
   
+  # load library lubridate
+  library(lubridate)
+  
+  # Order by year and create vector for all available dates
+  df <- df[order(df$Year),]
+  availableDates <- unique(df$Year)
+ 
+  # date and month
+  startYear <- as.numeric(substr(from,1,4))
+  startMonth <- as.numeric(substr(from,6,7))
+  endYear <- as.numeric(substr(to,1,4))
+  endMonth <- as.numeric(substr(to,6,7))
+  
+  # determine the start date and month
+  startDate <- ymd(str_c(startYear, startMonth, "01", sep = "-"))
+  endDate <- ymd(str_c(endYear, endMonth, "01", sep = "-"))
+  startIndex <- match(startDate, availableDates)
+  endIndex <- match(endDate, availableDates)
+  
+  # error handling for date to check if it is valid
+  if(is.na(startIndex)){
+    stop("Start date is invalid!")
+  }
+  if(is.na(endIndex)){
+    stop("End date is invalid!")
+  }
+  
+  # subset dates to be taken
+  dateFrame <- availableDates[startIndex:endIndex]
+  
+  # iterate dataframe to subset dataframe
+  df1 <- data.frame()
+  for(d in dateFrame){
+    df$Section <- df$Year == d
+    df.temp <- df[df$Section == TRUE,]
+    df1 <- rbind(df1,df.temp)
+  }
+  
+  # remove Section column
+  df1 <- df1[1:(length(df1)-1)]
+  df1
 }
 
 
@@ -44,13 +85,18 @@ timeframeZHVI <- function(df, from, to){
 # parameter dataframe/tibble
 # return dataframe/tibble
 rateOfChangeZHVI <- function(df){
+  
+  # Ensure that one Type and one RegionName
   if(length(df$Year) != length(unique(df$Year))){
     stop("Duplicate Year variable found! Try subsetting by Type and RegionName
          or remove duplicate value")
   }
+  
+  # 
   df <- df[order(df$Year),]
   df$RateOfChange <- 0
   
+  # calculation of rate of change
   for(i in 1:(length(df$Year) - 1)){
     change <- (df$HousePrice[i+1] - df$HousePrice[i])/df$HousePrice[i]
     df$RateOfChange[i+1] <- change*100
@@ -58,4 +104,3 @@ rateOfChangeZHVI <- function(df){
   
   df
 }
-
