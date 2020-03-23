@@ -2,7 +2,7 @@
 library(tidyverse)
 
 #set working directory for data
-#setwd("C:/Users/JHo99/Downloads/ZHVI Clean")
+setwd("C:/Users/JHo99/Downloads/ZHVI Clean")
 
 #load dataframes of all different ZHVI metrics
 #remove first column that is added by R
