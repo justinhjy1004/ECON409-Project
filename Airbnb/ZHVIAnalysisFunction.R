@@ -1,5 +1,3 @@
-setwd("C:/Users/JHo99/Box/Prepared Data/ZHVI Clean")
-
 library(tidyverse)
 library(rlist)
 library(pipeR)
@@ -11,9 +9,12 @@ cities <- list("SanFrancisco", "Nashville", "Portland", "Washington", "Seattle",
 types <- list("2bedrooms",   "4bedrooms",   "All Homes",   "Bottom Tier", "Condo",      
           "Top Tier" )
 
+df <- read_csv("C:/Users/JHo99/Box/Prepared Data/ZHVI Clean/ZHVI.csv")
+
 # a function that subsets the ZHVI database according to city and type
 # returns a dataframe/tibble after subsetting 
-subsetZHVI <- function(df, city, type){
+subsetZHVI <- function(city, type){
+  a <- df
   validCity <- list.search(cities, . == city)
   validType <- list.search(types, . == type)
   
@@ -24,15 +25,17 @@ subsetZHVI <- function(df, city, type){
     stop("Invalid type!")
   }
   
-  df <- df[df$RegionName == city & df$Type == type,]
+  a <- a[a$RegionName == city & a$Type == type,]
   
-  df
+  a
 }
+
 
 # takes in a dataframe/tibble and a date [from] to a date [to], in the format of 
 # YYYY-MM-DD in the form of string
 # Returns a dataframe according to the month and year provided
-timeframeZHVI <- function(df, from, to){
+timeframeZHVI <- function(from, to){
+  df <- read_csv("C:/Users/JHo99/Box/Prepared Data/ZHVI Clean/ZHVI.csv")
   
   # load library lubridate
   library(lubridate)
@@ -83,8 +86,7 @@ timeframeZHVI <- function(df, from, to){
 # parameter dataframe/tibble
 # return dataframe/tibble
 rateOfChangeZHVI <- function(df){
-  
-  # Ensure that one Type and one RegionName
+    # Ensure that one Type and one RegionName
   if(length(df$Year) != length(unique(df$Year))){
     stop("Duplicate Year variable found! Try subsetting by Type and RegionName
          or remove duplicate value")
