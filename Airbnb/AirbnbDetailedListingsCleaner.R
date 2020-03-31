@@ -36,7 +36,8 @@ for(city in citiesList[[1]]){
   
   df.temp <- read_csv(str_c(nameOfCity,listingFileExt))
   
-  section <- c("id", "host_id", "latitude", "longitude", "price", "weekly_price", "monthly_price", "first_review", "last_review")
+  section <- c("id", "host_id", "latitude", "longitude", "price", 
+               "weekly_price", "monthly_price", "first_review", "last_review")
   
   df.temp <- df.temp[section]
   df.temp <- df.temp[complete.cases(df.temp[,8:9]),]
