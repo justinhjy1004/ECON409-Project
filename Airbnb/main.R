@@ -1,9 +1,9 @@
 source("C:/Users/JHo99/Documents/ECON409-Project/Airbnb/ZHVIAnalysisFunction.R")
 source("C:/Users/JHo99/Documents/ECON409-Project/Airbnb/AirbnbGraphingFunctions.R")
 
-a <- subsetZHVI("Austin", "All Homes")
-b <- subsetZHVI("Nashville", "All Homes")
-c <- subsetZHVI("Washington", "All Homes")
+a <- subsetZHVI("Austin", "All Homes", zhvi)
+b <- subsetZHVI("Nashville", "All Homes", zhvi)
+c <- subsetZHVI("Washington", "All Homes", zhvi)
 
 zhvi.graph <- rbind(a,b,c)
 
@@ -20,7 +20,8 @@ zhvi.graph.1 <- rbind(a.1,b.1,c.1)
 ggplot(data = zhvi.graph.1) +
   geom_line(mapping = aes(x = Year, y = RateOfChange, colour = RegionName)) +
   geom_hline(yintercept = 0) +
-  labs(x = "Date", y = "Change of House Price")
+  labs(x = "Date", y = "Change of House Price") +
+  theme_minimal()
 
 cities <- c("Austin", "WashingtonDC", "Nashville")
 

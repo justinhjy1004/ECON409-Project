@@ -1,6 +1,7 @@
 library(tidyverse)
 library(rlist)
 library(pipeR)
+library(lubridate)
 
 # city and types in ZHVI Combined.csv
 cities <- list("SanFrancisco", "Nashville", "Portland", "Washington", "Seattle",
@@ -9,36 +10,32 @@ cities <- list("SanFrancisco", "Nashville", "Portland", "Washington", "Seattle",
 types <- list("2bedrooms",   "4bedrooms",   "All Homes",   "Bottom Tier", "Condo",      
           "Top Tier" )
 
-df <- read_csv("C:/Users/JHo99/Box/Prepared Data/ZHVI Clean/ZHVI.csv")
+zhvi <- read_csv("C:/Users/JHo99/Box/Prepared Data/ZHVI Clean/ZHVI.csv")
+zri <- read_csv("C:/Users/JHo99/Box/Prepared Data/ZRI Clean/ZRI.csv")
 
 # a function that subsets the ZHVI database according to city and type
 # returns a dataframe/tibble after subsetting 
-subsetZHVI <- function(city, type){
-  a <- df
-  validCity <- list.search(cities, . == city)
-  validType <- list.search(types, . == type)
+subsetZHVI <- function(city, type, df){
   
-  if(length(validCity) != 1){
-    stop("Invalid city!")
-  }
-  if(length(validType) != 1){
-    stop("Invalid type!")
-  }
+  df <- df[df$RegionName == city & df$Type == type,]
   
-  a <- a[a$RegionName == city & a$Type == type,]
+  return(df)
+}
+
+# a function that subsets the ZRI database according to city
+# returns a dataframe/tibble after subsetting 
+subsetZRI <- function(city, df){
   
-  a
+  df <- df[df$RegionName == city,]
+  
+  return(df)
 }
 
 
 # takes in a dataframe/tibble and a date [from] to a date [to], in the format of 
 # YYYY-MM-DD in the form of string
 # Returns a dataframe according to the month and year provided
-timeframeZHVI <- function(from, to){
-  df <- read_csv("C:/Users/JHo99/Box/Prepared Data/ZHVI Clean/ZHVI.csv")
-  
-  # load library lubridate
-  library(lubridate)
+timeframeZHVI <- function(from, to, df){
   
   # Order by year and create vector for all available dates
   df <- df[order(df$Year),]
@@ -77,7 +74,7 @@ timeframeZHVI <- function(from, to){
   
   # remove Section column
   df1 <- df1[1:(length(df1)-1)]
-  df1
+  return(df1)
 }
 
 
@@ -99,6 +96,51 @@ rateOfChangeZHVI <- function(df){
   # calculation of rate of change
   for(i in 1:(length(df$Year) - 1)){
     change <- (df$HousePrice[i+1] - df$HousePrice[i])/df$HousePrice[i]
+    df$RateOfChange[i+1] <- change*100
+  }
+  
+  df
+}
+
+# prints outcome of a two-tailed hypothesis for changes in house prices
+# with or without Airbnb
+printOutcome <- function(city,type, from.0, to.0, mu.0, from.1, to.1, mu.1, pval.mu, s){
+  
+  if(pval.mu < s){
+    cat(sprintf("City: %s \n 
+  Type: %s \n
+  Average Rate of Change of House Prices from %s to %s: %f\n
+  Average Rate of Change of House Prices from %s to %s: %f\n
+  p-value: %f\n
+  We reject the Null Hypothesis \n \n",city, type, from.0, to.0, mu.0,from.1, to.1, mu.1, pval.mu) )
+  } else {
+    cat(sprintf("City: %s \n
+  Type: %s \n
+  Average Rate of Change of House Prices from %s to %s: %f\n
+  Average Rate of Change of House Prices from %s to %s: %f\n
+  p-value: %f\n
+  We fail to reject the Null Hypothesis \n \n",city,type, from.0, to.0, mu.0,from.1, to.1, mu.1, pval.mu) )
+  }
+}
+
+# a function that takes in a subset of ZRI Data and outputs the RateOfChange 
+# on a monthly basis
+# parameter dataframe/tibble
+# return dataframe/tibble
+rateOfChangeZRI <- function(df){
+  # Ensure that one Type and one RegionName
+  if(length(df$Year) != length(unique(df$Year))){
+    stop("Duplicate Year variable found! Try subsetting by Type and RegionName
+         or remove duplicate value")
+  }
+  
+  # 
+  df <- df[order(df$Year),]
+  df$RateOfChange <- 0
+  
+  # calculation of rate of change
+  for(i in 1:(length(df$Year) - 1)){
+    change <- (df$Rent[i+1] - df$Rent[i])/df$Rent[i]
     df$RateOfChange[i+1] <- change*100
   }
   

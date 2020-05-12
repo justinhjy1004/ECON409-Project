@@ -1,0 +1,1008 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={PriceAnalysis.R},
+  pdfauthor={JHo99},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{PriceAnalysis.R}
+\author{JHo99}
+\date{2020-04-20}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Analysis Functions}
+\KeywordTok{source}\NormalTok{(}\StringTok{"C:/Users/JHo99/Documents/ECON409-Project/Airbnb/ZHVIAnalysisFunction.R"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages ------------------------------------------- tidyverse 1.3.0 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.3.0     v purrr   0.3.3
+## v tibble  2.1.3     v dplyr   0.8.3
+## v tidyr   1.0.2     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.4.0
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ---------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'rlist' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'pipeR' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'lubridate'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:base':
+## 
+##     date
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Missing column names filled in: 'X1' [1]
+\end{verbatim}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   X1 = col_double(),
+##   RegionID = col_double(),
+##   RegionName = col_character(),
+##   State = col_character(),
+##   Metro = col_character(),
+##   CountyName = col_character(),
+##   SizeRank = col_double(),
+##   Year = col_date(format = ""),
+##   HousePrice = col_double(),
+##   Type = col_character()
+## )
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Missing column names filled in: 'X1' [1]
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Duplicated column names deduplicated: 'X1' => 'X1_1' [2]
+\end{verbatim}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   X1 = col_double(),
+##   X1_1 = col_double(),
+##   RegionID = col_double(),
+##   RegionName = col_character(),
+##   State = col_character(),
+##   Metro = col_character(),
+##   CountyName = col_character(),
+##   SizeRank = col_double(),
+##   Year = col_date(format = ""),
+##   Rent = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{source}\NormalTok{(}\StringTok{"C:/Users/JHo99/Documents/ECON409-Project/Airbnb/AirbnbGraphingFunctions.R"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Missing column names filled in: 'X1' [1]
+\end{verbatim}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   X1 = col_double(),
+##   city = col_character(),
+##   cityId = col_double(),
+##   date = col_date(format = ""),
+##   count = col_double()
+## )
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Missing column names filled in: 'X1' [1]
+\end{verbatim}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   X1 = col_double(),
+##   city = col_character(),
+##   cityId = col_double(),
+##   date = col_date(format = ""),
+##   listings = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{source}\NormalTok{(}\StringTok{"C:/Users/JHo99/Documents/ECON409-Project/Airbnb/AirbnbAnalysisFunction.R"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'forecast' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## Registered S3 method overwritten by 'quantmod':
+##   method            from
+##   as.zoo.data.frame zoo
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Missing column names filled in: 'X1' [1]
+\end{verbatim}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   X1 = col_double(),
+##   city = col_character(),
+##   cityId = col_double(),
+##   date = col_date(format = ""),
+##   count = col_double()
+## )
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Missing column names filled in: 'X1' [1]
+\end{verbatim}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   X1 = col_double(),
+##   city = col_character(),
+##   cityId = col_double(),
+##   date = col_date(format = ""),
+##   listings = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# vector containing the cities in ZHVI}
+\NormalTok{citiesZHVI <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"SanFrancisco"}\NormalTok{, }\StringTok{"Nashville"}\NormalTok{, }\StringTok{"Portland"}\NormalTok{, }\StringTok{"Washington"}\NormalTok{, }\StringTok{"Seattle"}\NormalTok{,}
+                \StringTok{"SaintPaul"}\NormalTok{, }\StringTok{"Minneapolis"}\NormalTok{, }\StringTok{"Denver"}\NormalTok{, }\StringTok{"Columbus"}\NormalTok{,    }
+                \StringTok{"Austin"}\NormalTok{, }\StringTok{"Chicago"}\NormalTok{, }\StringTok{"LosAngeles"}\NormalTok{, }\StringTok{"NewYork"}\NormalTok{)}
+
+\NormalTok{citiesAirbnb <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"SanFrancisco"}\NormalTok{, }\StringTok{"Nashville"}\NormalTok{, }\StringTok{"Portland"}\NormalTok{, }\StringTok{"WashingtonDC"}\NormalTok{, }\StringTok{"Seattle"}\NormalTok{,}
+                  \StringTok{"TwinCities"}\NormalTok{, }\StringTok{"TwinCities"}\NormalTok{,}\StringTok{"Denver"}\NormalTok{, }\StringTok{"Columbus"}\NormalTok{,}
+                   \StringTok{"Austin"}\NormalTok{, }\StringTok{"Chicago"}\NormalTok{, }\StringTok{"LosAngeles"}\NormalTok{, }\StringTok{"NewYork"}\NormalTok{)}
+
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\StringTok{ }\KeywordTok{length}\NormalTok{(citiesZHVI))\{}
+\NormalTok{  city <-}\StringTok{ }\NormalTok{citiesZHVI[i]}
+\NormalTok{  cityListing <-}\StringTok{ }\NormalTok{citiesAirbnb[i]}
+  \CommentTok{# subset the listing counts}
+\NormalTok{  listing.city <-}\StringTok{ }\KeywordTok{subsetListings}\NormalTok{(cityListing)}
+\NormalTok{  listing.city <-}\StringTok{ }\KeywordTok{timeframeListingsAirbnb}\NormalTok{(}\StringTok{"2010-09-01"}\NormalTok{, }\StringTok{"2019-12-01"}\NormalTok{, listing.city)}
+  
+\NormalTok{  start <-}\StringTok{ }\KeywordTok{min}\NormalTok{(listing.city}\OperatorTok{$}\NormalTok{date)}
+\NormalTok{  startYear <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{substr}\NormalTok{(start,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{))}
+\NormalTok{  startMonth <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{substr}\NormalTok{(start,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{))}
+  
+\NormalTok{  listing.ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ listing.city}\OperatorTok{$}\NormalTok{listings, }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }
+                   \DataTypeTok{start =} \KeywordTok{c}\NormalTok{(startYear, startMonth))}
+  
+  \CommentTok{# subset cities of ZRI}
+\NormalTok{  zri.city <-}\StringTok{ }\KeywordTok{subsetZRI}\NormalTok{(city, zri)}
+  
+\NormalTok{  start <-}\StringTok{ }\KeywordTok{min}\NormalTok{(zri.city}\OperatorTok{$}\NormalTok{Year)}
+\NormalTok{  startYear <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{substr}\NormalTok{(start,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{))}
+\NormalTok{  startMonth <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{substr}\NormalTok{(start,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{))}
+  
+\NormalTok{  zri.ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ zri.city}\OperatorTok{$}\NormalTok{Rent, }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }
+               \DataTypeTok{start =} \KeywordTok{c}\NormalTok{(startYear, startMonth))}
+  
+  \CommentTok{# subset cities of ZHVI}
+\NormalTok{  zhvi.city <-}\StringTok{ }\KeywordTok{subsetZHVI}\NormalTok{(city, }\StringTok{"All Homes"}\NormalTok{, zhvi)}
+\NormalTok{  zhvi.city <-}\StringTok{ }\KeywordTok{timeframeZHVI}\NormalTok{(}\StringTok{"2010-09-01"}\NormalTok{, }\StringTok{"2019-12-01"}\NormalTok{, zhvi.city)}
+  
+\NormalTok{  start <-}\StringTok{ }\KeywordTok{min}\NormalTok{(zhvi.city}\OperatorTok{$}\NormalTok{Year)}
+\NormalTok{  startYear <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{substr}\NormalTok{(start,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{))}
+\NormalTok{  startMonth <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{substr}\NormalTok{(start,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{))}
+  
+\NormalTok{  zhvi.ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ zhvi.city}\OperatorTok{$}\NormalTok{HousePrice, }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }
+                \DataTypeTok{start =} \KeywordTok{c}\NormalTok{(startYear, startMonth))}
+  
+\NormalTok{  zriListing <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{listing =}\NormalTok{ listing.ts, }\DataTypeTok{RentPrice =}\NormalTok{ zri.ts)}
+\NormalTok{  tsModelZRI <-}\StringTok{ }\KeywordTok{tslm}\NormalTok{(RentPrice }\OperatorTok{~}\StringTok{ }\NormalTok{listing, zriListing)}
+  
+  \CommentTok{# linear regression}
+\NormalTok{  zhviListing <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{listing =}\NormalTok{ listing.ts, }\DataTypeTok{HousePrice =}\NormalTok{ zhvi.ts)}
+\NormalTok{  tsModelZHVI <-}\StringTok{ }\KeywordTok{tslm}\NormalTok{(HousePrice }\OperatorTok{~}\StringTok{ }\NormalTok{listing, zhviListing)}
+  
+\NormalTok{  avg <-}\StringTok{ }\DecValTok{50}
+\NormalTok{  y <-}\StringTok{ }\NormalTok{avg }\OperatorTok{+}\StringTok{ }\FloatTok{2.5} \OperatorTok{*}\StringTok{ }\NormalTok{avg}
+  
+\NormalTok{  y.rent}\FloatTok{.0}\NormalTok{ <-}\StringTok{ }\NormalTok{zri.city}\OperatorTok{$}\NormalTok{Rent[}\DecValTok{1}\NormalTok{]}
+\NormalTok{  y.house}\FloatTok{.0}\NormalTok{ <-}\StringTok{ }\NormalTok{zhvi.city}\OperatorTok{$}\NormalTok{HousePrice[}\DecValTok{1}\NormalTok{]}
+  
+\NormalTok{  p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ listing.city) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ date, }\DataTypeTok{y =}\NormalTok{ (listings}\OperatorTok{/}\NormalTok{(}\KeywordTok{max}\NormalTok{(listings)))}\OperatorTok{*}\DecValTok{100} \OperatorTok{+}\StringTok{ }\DecValTok{100}\NormalTok{), }\DataTypeTok{colour =} \StringTok{"red"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ zri.city, }\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Year, }\DataTypeTok{y =}\NormalTok{ (Rent}\OperatorTok{/}\NormalTok{(y.rent}\FloatTok{.0}\NormalTok{))}\OperatorTok{*}\DecValTok{100}\NormalTok{), }\DataTypeTok{colour =} \StringTok{"blue"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ zhvi.city, }\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Year, }\DataTypeTok{y =}\NormalTok{ (HousePrice}\OperatorTok{/}\NormalTok{(y.house}\FloatTok{.0}\NormalTok{))}\OperatorTok{*}\DecValTok{100}\NormalTok{), }\DataTypeTok{colour =} \StringTok{"black"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Time"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{    }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Index Value"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{annotate}\NormalTok{(}\DataTypeTok{geom=}\StringTok{"text"}\NormalTok{, }\DataTypeTok{x=}\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2012-12-01"}\NormalTok{), }\DataTypeTok{y=}\NormalTok{ y, }\DataTypeTok{label=}\StringTok{"Index of Listings"}\NormalTok{,}
+             \DataTypeTok{color=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{annotate}\NormalTok{(}\DataTypeTok{geom=}\StringTok{"text"}\NormalTok{, }\DataTypeTok{x=}\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2012-12-01"}\NormalTok{), }\DataTypeTok{y=}\NormalTok{ y }\OperatorTok{-}\StringTok{ }\FloatTok{0.2}\OperatorTok{*}\NormalTok{avg , }\DataTypeTok{label=}\StringTok{"Index of Rent Price"}\NormalTok{,}
+             \DataTypeTok{color=}\StringTok{"blue"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{annotate}\NormalTok{(}\DataTypeTok{geom=}\StringTok{"text"}\NormalTok{, }\DataTypeTok{x=}\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2012-12-01"}\NormalTok{), }\DataTypeTok{y=}\NormalTok{ y }\OperatorTok{-}\StringTok{ }\FloatTok{0.4}\OperatorTok{*}\NormalTok{avg, }\DataTypeTok{label=}\StringTok{"Index of House Price"}\NormalTok{,}
+             \DataTypeTok{color=}\StringTok{"black"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{ggtitle}\NormalTok{(city)}
+  
+\NormalTok{  fileName <-}\StringTok{ }\KeywordTok{str_c}\NormalTok{(}\StringTok{"C:/Users/JHo99/Box/Prepared Data/Price Plots/"}\NormalTok{,city,}\StringTok{".jpg"}\NormalTok{)}
+  
+  \KeywordTok{print}\NormalTok{(}\KeywordTok{str_c}\NormalTok{(}\StringTok{"City: "}\NormalTok{ ,city))}
+  \KeywordTok{print}\NormalTok{(}\StringTok{"Time Series Linear Regression between ZRI Growth and Airbnb Listings Growth"}\NormalTok{)}
+  \KeywordTok{print}\NormalTok{(}\KeywordTok{summary}\NormalTok{(tsModelZRI))}
+  \KeywordTok{print}\NormalTok{(}\StringTok{"Time Series Linear Regression between ZHVI Growth and Airbnb Listings Growth"}\NormalTok{)}
+  \KeywordTok{print}\NormalTok{(}\KeywordTok{summary}\NormalTok{(tsModelZHVI))}
+  \KeywordTok{print}\NormalTok{(p)}
+  
+  \KeywordTok{ggsave}\NormalTok{(}\DataTypeTok{filename =}\NormalTok{ fileName, }\DataTypeTok{plot =}\NormalTok{ p, }\DataTypeTok{device =} \StringTok{"jpeg"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "City: SanFrancisco"
+## [1] "Time Series Linear Regression between ZRI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = RentPrice ~ listing, data = zriListing)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -230.76 -146.92  -71.24  131.93  468.75 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 4450.65212   27.51851  161.73   <2e-16 ***
+## listing       -0.33307    0.01309  -25.44   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 188.6 on 110 degrees of freedom
+## Multiple R-squared:  0.8547, Adjusted R-squared:  0.8534 
+## F-statistic: 647.2 on 1 and 110 DF,  p-value: < 2.2e-16
+## 
+## [1] "Time Series Linear Regression between ZHVI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = HousePrice ~ listing, data = zhviListing)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -69975 -39508 -19099  50579 110754 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  1.323e+06  7.327e+03  180.63   <2e-16 ***
+## listing     -1.751e+02  3.486e+00  -50.24   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 50220 on 110 degrees of freedom
+## Multiple R-squared:  0.9582, Adjusted R-squared:  0.9579 
+## F-statistic:  2525 on 1 and 110 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\includegraphics{PriceAnalysis_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\begin{verbatim}
+## [1] "City: Nashville"
+## [1] "Time Series Linear Regression between ZRI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = RentPrice ~ listing, data = zriListing)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -148.79  -66.59   14.91   52.59  171.03 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  1.477e+03  8.184e+00  180.42   <2e-16 ***
+## listing     -9.425e-02  4.741e-03  -19.88   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 69.01 on 110 degrees of freedom
+## Multiple R-squared:  0.7822, Adjusted R-squared:  0.7803 
+## F-statistic: 395.2 on 1 and 110 DF,  p-value: < 2.2e-16
+## 
+## [1] "Time Series Linear Regression between ZHVI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = HousePrice ~ listing, data = zhviListing)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -37929 -30110  -6043  31630  51113 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 229991.379   3626.511   63.42   <2e-16 ***
+## listing        -23.125      2.101  -11.01   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 30580 on 110 degrees of freedom
+## Multiple R-squared:  0.5241, Adjusted R-squared:  0.5197 
+## F-statistic: 121.1 on 1 and 110 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\includegraphics{PriceAnalysis_files/figure-latex/unnamed-chunk-1-2.pdf}
+
+\begin{verbatim}
+## [1] "City: Portland"
+## [1] "Time Series Linear Regression between ZRI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = RentPrice ~ listing, data = zriListing)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -136.66  -51.91   10.39   42.36  144.66 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  1.691e+03  8.149e+00  207.50   <2e-16 ***
+## listing     -1.530e-01  5.803e-03  -26.36   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 62.47 on 110 degrees of freedom
+## Multiple R-squared:  0.8634, Adjusted R-squared:  0.8621 
+## F-statistic:   695 on 1 and 110 DF,  p-value: < 2.2e-16
+## 
+## [1] "Time Series Linear Regression between ZHVI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = HousePrice ~ listing, data = zhviListing)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -45555 -31618   6534  26723  60688 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 425886.317   4110.861  103.60   <2e-16 ***
+## listing        -68.859      2.927  -23.52   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 31510 on 110 degrees of freedom
+## Multiple R-squared:  0.8342, Adjusted R-squared:  0.8327 
+## F-statistic: 553.3 on 1 and 110 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\includegraphics{PriceAnalysis_files/figure-latex/unnamed-chunk-1-3.pdf}
+
+\begin{verbatim}
+## [1] "City: Washington"
+## [1] "Time Series Linear Regression between ZRI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = RentPrice ~ listing, data = zriListing)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -102.744  -29.155    8.429   33.306   84.223 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  2.287e+03  5.814e+00  393.39   <2e-16 ***
+## listing     -6.740e-02  3.049e-03  -22.11   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 44.93 on 110 degrees of freedom
+## Multiple R-squared:  0.8163, Adjusted R-squared:  0.8146 
+## F-statistic: 488.7 on 1 and 110 DF,  p-value: < 2.2e-16
+## 
+## [1] "Time Series Linear Regression between ZHVI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = HousePrice ~ listing, data = zhviListing)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -34139 -16395  -6360  16520  46869 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 583069.944   2876.757  202.68   <2e-16 ***
+## listing        -48.808      1.508  -32.36   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 22230 on 110 degrees of freedom
+## Multiple R-squared:  0.9049, Adjusted R-squared:  0.9041 
+## F-statistic:  1047 on 1 and 110 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\includegraphics{PriceAnalysis_files/figure-latex/unnamed-chunk-1-4.pdf}
+
+\begin{verbatim}
+## [1] "City: Seattle"
+## [1] "Time Series Linear Regression between ZRI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = RentPrice ~ listing, data = zriListing)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -141.03  -61.98   13.98   54.77  175.43 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  2.205e+03  9.555e+00  230.78   <2e-16 ***
+## listing     -2.058e-01  5.109e-03  -40.28   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 73.14 on 110 degrees of freedom
+## Multiple R-squared:  0.9365, Adjusted R-squared:  0.9359 
+## F-statistic:  1623 on 1 and 110 DF,  p-value: < 2.2e-16
+## 
+## [1] "Time Series Linear Regression between ZHVI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = HousePrice ~ listing, data = zhviListing)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -101312  -55500  -22051   66262  122805 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 668856.783   9266.632   72.18   <2e-16 ***
+## listing        -92.101      4.955  -18.59   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 70930 on 110 degrees of freedom
+## Multiple R-squared:  0.7585, Adjusted R-squared:  0.7563 
+## F-statistic: 345.5 on 1 and 110 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\includegraphics{PriceAnalysis_files/figure-latex/unnamed-chunk-1-5.pdf}
+
+\begin{verbatim}
+## [1] "City: SaintPaul"
+## [1] "Time Series Linear Regression between ZRI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = RentPrice ~ listing, data = zriListing)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -115.928  -41.198   -3.489   44.015   82.341 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  1.298e+03  5.823e+00  222.93   <2e-16 ***
+## listing     -1.358e-01  6.011e-03  -22.59   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 48.77 on 110 degrees of freedom
+## Multiple R-squared:  0.8227, Adjusted R-squared:  0.8211 
+## F-statistic: 510.3 on 1 and 110 DF,  p-value: < 2.2e-16
+## 
+## [1] "Time Series Linear Regression between ZHVI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = HousePrice ~ listing, data = zhviListing)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -25843 -16007  -6182  18593  33115 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 199404.389   2252.663   88.52   <2e-16 ***
+## listing        -29.132      2.325  -12.53   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 18860 on 110 degrees of freedom
+## Multiple R-squared:  0.5879, Adjusted R-squared:  0.5842 
+## F-statistic:   157 on 1 and 110 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\includegraphics{PriceAnalysis_files/figure-latex/unnamed-chunk-1-6.pdf}
+
+\begin{verbatim}
+## [1] "City: Minneapolis"
+## [1] "Time Series Linear Regression between ZRI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = RentPrice ~ listing, data = zriListing)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -87.933 -42.705   2.734  43.301  84.599 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  1.537e+03  5.977e+00  257.21   <2e-16 ***
+## listing     -1.675e-01  6.169e-03  -27.15   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 50.05 on 110 degrees of freedom
+## Multiple R-squared:  0.8701, Adjusted R-squared:  0.869 
+## F-statistic: 737.1 on 1 and 110 DF,  p-value: < 2.2e-16
+## 
+## [1] "Time Series Linear Regression between ZHVI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = HousePrice ~ listing, data = zhviListing)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -30212 -22599  -5641  24905  40633 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 243233.758   2831.387   85.91   <2e-16 ***
+## listing        -40.231      2.923  -13.77   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 23710 on 110 degrees of freedom
+## Multiple R-squared:  0.6327, Adjusted R-squared:  0.6293 
+## F-statistic: 189.5 on 1 and 110 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\includegraphics{PriceAnalysis_files/figure-latex/unnamed-chunk-1-7.pdf}
+
+\begin{verbatim}
+## [1] "City: Denver"
+## [1] "Time Series Linear Regression between ZRI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = RentPrice ~ listing, data = zriListing)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -139.16  -60.28   16.90   59.60  117.51 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  1.791e+03  8.378e+00  213.82   <2e-16 ***
+## listing     -2.358e-01  7.595e-03  -31.05   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 69.6 on 110 degrees of freedom
+## Multiple R-squared:  0.8976, Adjusted R-squared:  0.8966 
+## F-statistic: 963.9 on 1 and 110 DF,  p-value: < 2.2e-16
+## 
+## [1] "Time Series Linear Regression between ZHVI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = HousePrice ~ listing, data = zhviListing)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -61225 -44083  -5769  44927  69789 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 383894.012   5544.112   69.24   <2e-16 ***
+## listing        -76.611      5.026  -15.24   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 46060 on 110 degrees of freedom
+## Multiple R-squared:  0.6786, Adjusted R-squared:  0.6757 
+## F-statistic: 232.3 on 1 and 110 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\includegraphics{PriceAnalysis_files/figure-latex/unnamed-chunk-1-8.pdf}
+
+\begin{verbatim}
+## [1] "City: Columbus"
+## [1] "Time Series Linear Regression between ZRI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = RentPrice ~ listing, data = zriListing)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -82.58 -23.57  11.44  32.60  65.79 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 1084.50926    4.74372  228.62   <2e-16 ***
+## listing       -0.29637    0.01677  -17.68   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 41.43 on 110 degrees of freedom
+## Multiple R-squared:  0.7396, Adjusted R-squared:  0.7373 
+## F-statistic: 312.5 on 1 and 110 DF,  p-value: < 2.2e-16
+## 
+## [1] "Time Series Linear Regression between ZHVI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = HousePrice ~ listing, data = zhviListing)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -23530 -17282  -4380  13988  37912 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 130958.067   2096.827  62.455  < 2e-16 ***
+## listing        -44.561      7.411  -6.013 2.42e-08 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 18310 on 110 degrees of freedom
+## Multiple R-squared:  0.2474, Adjusted R-squared:  0.2405 
+## F-statistic: 36.16 on 1 and 110 DF,  p-value: 2.421e-08
+\end{verbatim}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\includegraphics{PriceAnalysis_files/figure-latex/unnamed-chunk-1-9.pdf}
+
+\begin{verbatim}
+## [1] "City: Austin"
+## [1] "Time Series Linear Regression between ZRI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = RentPrice ~ listing, data = zriListing)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -68.883 -23.405  -3.556  24.612  96.127 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  1.588e+03  4.553e+00  348.81   <2e-16 ***
+## listing     -9.042e-02  2.151e-03  -42.05   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 34.1 on 110 degrees of freedom
+## Multiple R-squared:  0.9414, Adjusted R-squared:  0.9409 
+## F-statistic:  1768 on 1 and 110 DF,  p-value: < 2.2e-16
+## 
+## [1] "Time Series Linear Regression between ZHVI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = HousePrice ~ listing, data = zhviListing)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -29827 -16973  -3830  14380  46903 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 355674.894   2695.997  131.93   <2e-16 ***
+## listing        -35.311      1.273  -27.73   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 20190 on 110 degrees of freedom
+## Multiple R-squared:  0.8748, Adjusted R-squared:  0.8737 
+## F-statistic: 768.9 on 1 and 110 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\includegraphics{PriceAnalysis_files/figure-latex/unnamed-chunk-1-10.pdf}
+
+\begin{verbatim}
+## [1] "City: Chicago"
+## [1] "Time Series Linear Regression between ZRI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = RentPrice ~ listing, data = zriListing)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -81.679 -26.506  -4.605  19.463 109.177 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 1641.06030    5.20507  315.28   <2e-16 ***
+## listing       -0.05431    0.00280  -19.39   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 42.64 on 110 degrees of freedom
+## Multiple R-squared:  0.7737, Adjusted R-squared:  0.7717 
+## F-statistic: 376.2 on 1 and 110 DF,  p-value: < 2.2e-16
+## 
+## [1] "Time Series Linear Regression between ZHVI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = HousePrice ~ listing, data = zhviListing)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -27543 -14922  -1767  18358  36822 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 222806.551   2171.807  102.59   <2e-16 ***
+## listing        -12.921      1.168  -11.06   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 17790 on 110 degrees of freedom
+## Multiple R-squared:  0.5265, Adjusted R-squared:  0.5222 
+## F-statistic: 122.3 on 1 and 110 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\includegraphics{PriceAnalysis_files/figure-latex/unnamed-chunk-1-11.pdf}
+
+\begin{verbatim}
+## [1] "City: LosAngeles"
+## [1] "Time Series Linear Regression between ZRI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = RentPrice ~ listing, data = zriListing)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -176.77  -90.55   30.71   71.27  198.95 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  2.683e+03  1.294e+01  207.35   <2e-16 ***
+## listing     -3.542e-02  1.699e-03  -20.84   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 100.3 on 110 degrees of freedom
+## Multiple R-squared:  0.798,  Adjusted R-squared:  0.7961 
+## F-statistic: 434.5 on 1 and 110 DF,  p-value: < 2.2e-16
+## 
+## [1] "Time Series Linear Regression between ZHVI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = HousePrice ~ listing, data = zhviListing)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -60463 -42669 -19253  53798  84750 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  6.448e+05  5.944e+03  108.49   <2e-16 ***
+## listing     -1.790e+01  7.805e-01  -22.94   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 46060 on 110 degrees of freedom
+## Multiple R-squared:  0.8271, Adjusted R-squared:  0.8255 
+## F-statistic:   526 on 1 and 110 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\includegraphics{PriceAnalysis_files/figure-latex/unnamed-chunk-1-12.pdf}
+
+\begin{verbatim}
+## [1] "City: NewYork"
+## [1] "Time Series Linear Regression between ZRI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = RentPrice ~ listing, data = zriListing)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -90.18 -35.66  -9.86  35.26 142.63 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  2.351e+03  7.003e+00  335.66   <2e-16 ***
+## listing     -4.249e-02  7.815e-04  -54.36   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 50.66 on 110 degrees of freedom
+## Multiple R-squared:  0.9641, Adjusted R-squared:  0.9638 
+## F-statistic:  2955 on 1 and 110 DF,  p-value: < 2.2e-16
+## 
+## [1] "Time Series Linear Regression between ZHVI Growth and Airbnb Listings Growth"
+## 
+## Call:
+## tslm(formula = HousePrice ~ listing, data = zhviListing)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -43395 -33948  -9366  37418  59453 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  6.091e+05  4.793e+03  127.06   <2e-16 ***
+## listing     -1.172e+01  5.349e-01  -21.91   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 34670 on 110 degrees of freedom
+## Multiple R-squared:  0.8135, Adjusted R-squared:  0.8119 
+## F-statistic:   480 on 1 and 110 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{verbatim}
+## Saving 6.5 x 4.5 in image
+\end{verbatim}
+
+\includegraphics{PriceAnalysis_files/figure-latex/unnamed-chunk-1-13.pdf}
+
+\end{document}
